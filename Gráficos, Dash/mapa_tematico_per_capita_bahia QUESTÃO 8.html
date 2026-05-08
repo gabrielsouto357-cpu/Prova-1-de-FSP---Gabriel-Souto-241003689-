@@ -1,0 +1,246 @@
+
+<h2 class="sr-only">Mapa temático comparativo de receita e gasto per capita — Vitória da Conquista e Ilhéus (BA), 2014–2023</h2>
+
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; }
+.panel { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; }
+.metric-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; }
+.metric-label { font-size: 12px; color: var(--color-text-secondary); margin: 0 0 4px; }
+.metric-value { font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin: 0; }
+.metric-sub { font-size: 11px; color: var(--color-text-tertiary); margin: 2px 0 0; }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.tab-btn { background: transparent; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 5px 14px; font-size: 13px; cursor: pointer; color: var(--color-text-secondary); transition: all 0.15s; }
+.tab-btn.active { background: var(--color-background-info); color: var(--color-text-info); border-color: var(--color-border-info); }
+.source-note { font-size: 11px; color: var(--color-text-tertiary); margin-top: 8px; }
+svg text { font-family: var(--font-sans); }
+</style>
+
+<div style="padding: 1rem 0;">
+
+<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; flex-wrap:wrap; gap:8px;">
+  <div>
+    <h3 style="margin:0; font-size:16px; font-weight:500;">Mapa temático — Receita e gasto per capita</h3>
+    <p style="margin:4px 0 0; font-size:13px; color:var(--color-text-secondary);">Vitória da Conquista e Ilhéus · Bahia · 2014–2023</p>
+  </div>
+  <div style="display:flex; gap:6px; flex-wrap:wrap;" id="tabBtns">
+    <button class="tab-btn active" onclick="setMetric('receita')">Receita corrente</button>
+    <button class="tab-btn" onclick="setMetric('gasto')">Despesa total</button>
+    <button class="tab-btn" onclick="setMetric('saude')">Saúde</button>
+    <button class="tab-btn" onclick="setMetric('educ')">Educação</button>
+  </div>
+</div>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:1rem;">
+  <div class="metric-card">
+    <p class="metric-label">Vitória da Conquista · 2023</p>
+    <p class="metric-value" id="vca-val" style="color:#185FA5;">R$ 3.408</p>
+    <p class="metric-sub">Pop. 370.879 (Censo IBGE 2022)</p>
+  </div>
+  <div class="metric-card">
+    <p class="metric-label">Ilhéus · 2023</p>
+    <p class="metric-value" id="ilh-val" style="color:#0F6E56;">R$ 4.296</p>
+    <p class="metric-sub">Pop. 178.649 (Censo IBGE 2022)</p>
+  </div>
+</div>
+
+<div style="display:grid; grid-template-columns:300px 1fr; gap:16px; align-items:start;">
+
+<div class="panel" style="position:relative;">
+  <p style="font-size:12px; color:var(--color-text-secondary); margin:0 0 8px;">Localização no estado da Bahia</p>
+  <svg id="mapSvg" viewBox="0 0 300 380" width="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="dot-vca" markerWidth="10" markerHeight="10" refX="5" refY="5">
+        <circle cx="5" cy="5" r="5" fill="#185FA5"/>
+      </marker>
+      <marker id="dot-ilh" markerWidth="10" markerHeight="10" refX="5" refY="5">
+        <circle cx="5" cy="5" r="5" fill="#0F6E56"/>
+      </marker>
+    </defs>
+
+    <rect width="300" height="380" rx="8" fill="var(--color-background-secondary)"/>
+
+    <!-- Approximate outline of Bahia state using simplified polygon -->
+    <!-- Based on geographic bounds: roughly -44.5W to -37.3W, -18.3S to -8.5S -->
+    <!-- Scale: x = (lon - (-44.5)) / 7.2 * 240 + 30, y = (lat - (-8.5)) / 9.8 * 300 + 30 -->
+    <path id="bahia-shape" d="
+      M 120,30 L 145,28 L 162,32 L 175,30 L 200,35 L 218,38 L 240,42 L 255,48 L 265,55 L 268,65
+      L 270,78 L 265,90 L 268,105 L 262,118 L 258,132 L 260,148 L 255,162 L 248,175
+      L 242,188 L 235,200 L 228,212 L 220,222 L 210,232 L 200,240 L 192,248
+      L 185,258 L 178,268 L 170,278 L 160,288 L 148,295 L 136,300
+      L 122,302 L 108,298 L 95,290 L 82,282 L 70,272 L 60,260
+      L 52,248 L 48,235 L 45,220 L 42,205 L 40,190 L 38,175
+      L 36,160 L 38,145 L 40,130 L 38,115 L 40,100 L 45,88
+      L 52,76 L 58,65 L 65,55 L 74,46 L 85,38 L 98,33 L 108,30 Z
+    " fill="#C0DD97" stroke="#639922" stroke-width="1"/>
+
+    <!-- Rio São Francisco approximate path -->
+    <path d="M 42,110 Q 55,95 70,98 Q 85,100 100,92 Q 118,84 138,82 Q 155,80 168,86 Q 182,92 195,88 Q 210,84 225,78 Q 240,72 258,68" 
+          fill="none" stroke="#85B7EB" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.6"/>
+    <text x="138" y="77" fill="#185FA5" font-size="8" text-anchor="middle" opacity="0.7">Rio São Francisco</text>
+
+    <!-- Atlantic coast highlight -->
+    <path d="M 255,48 L 265,55 L 268,65 L 270,78 L 265,90 L 268,105 L 262,118 L 258,132 L 260,148 L 255,162 L 248,175 L 242,188 L 235,200 L 228,212 L 220,222 L 210,232 L 200,240 L 192,248 L 185,258 L 178,268 L 170,278 L 160,288 L 148,295"
+          fill="none" stroke="#85B7EB" stroke-width="2" opacity="0.5"/>
+
+    <!-- Salvador (capital) for reference -->
+    <circle cx="243" cy="178" r="5" fill="#BA7517" opacity="0.85"/>
+    <text x="243" y="195" fill="#633806" font-size="9" text-anchor="middle" font-weight="500">Salvador</text>
+
+    <!-- Vitória da Conquista: lat -14.87, lon -40.84 -->
+    <!-- x = (-40.84 - (-44.5)) / 7.2 * 240 + 30 = 3.66/7.2*240+30 = 122+30 = 152 -->
+    <!-- y = (-14.87 - (-8.5)) / 9.8 * 300 + 30 = 6.37/9.8*300+30 = 195+30 = 225 -->
+    <circle id="dot-vca-main" cx="152" cy="218" r="10" fill="#185FA5" opacity="0.9" style="cursor:pointer"/>
+    <circle cx="152" cy="218" r="10" fill="none" stroke="#185FA5" stroke-width="2" opacity="0.4">
+      <animate attributeName="r" values="10;16;10" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <text x="152" y="240" fill="#0C447C" font-size="9" text-anchor="middle" font-weight="500">V. Conquista</text>
+
+    <!-- Ilhéus: lat -14.79, lon -39.03 -->
+    <!-- x = (-39.03 - (-44.5)) / 7.2 * 240 + 30 = 5.47/7.2*240+30 = 182+30 = 212 -->
+    <!-- y = (-14.79 - (-8.5)) / 9.8 * 300 + 30 = 6.29/9.8*300+30 = 193+30 = 223 -->
+    <circle id="dot-ilh-main" cx="212" cy="220" r="10" fill="#0F6E56" opacity="0.9" style="cursor:pointer"/>
+    <circle cx="212" cy="220" r="10" fill="none" stroke="#0F6E56" stroke-width="2" opacity="0.4">
+      <animate attributeName="r" values="10;16;10" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <text x="216" y="240" fill="#085041" font-size="9" text-anchor="start" font-weight="500">Ilhéus</text>
+
+    <!-- Compass -->
+    <text x="40" y="345" fill="var(--color-text-tertiary)" font-size="9">N ↑</text>
+    <text x="55" y="345" fill="var(--color-text-tertiary)" font-size="8">Bahia, Brasil</text>
+
+    <!-- Size legend -->
+    <circle cx="42" cy="362" r="5" fill="#185FA5" opacity="0.6"/>
+    <text x="50" y="366" fill="var(--color-text-secondary)" font-size="8">Municípios analisados</text>
+    <circle cx="130" cy="362" r="5" fill="#BA7517" opacity="0.7"/>
+    <text x="138" y="366" fill="var(--color-text-secondary)" font-size="8">Capital</text>
+    <line x1="185" y1="360" x2="210" y2="360" stroke="#85B7EB" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <text x="213" y="364" fill="var(--color-text-secondary)" font-size="8">R. S. Francisco</text>
+  </svg>
+  <p class="source-note">Geometria aproximada. Coordenadas: IBGE</p>
+</div>
+
+<div>
+  <div style="display:flex; gap:12px; margin-bottom:8px; flex-wrap:wrap; align-items:center;">
+    <span style="font-size:12px; color:var(--color-text-secondary); display:flex; align-items:center; gap:5px;">
+      <span class="legend-dot" style="background:#185FA5;"></span>Vitória da Conquista
+    </span>
+    <span style="font-size:12px; color:var(--color-text-secondary); display:flex; align-items:center; gap:5px;">
+      <span class="legend-dot" style="background:#0F6E56;"></span>Ilhéus
+    </span>
+    <span style="font-size:11px; color:var(--color-text-tertiary); margin-left:auto;" id="chart-subtitle">Receita corrente per capita (R$)</span>
+  </div>
+  <div style="position:relative; width:100%; height:280px;">
+    <canvas id="lineChart" role="img" aria-label="Gráfico de linha comparando indicadores per capita de Vitória da Conquista e Ilhéus entre 2014 e 2023"></canvas>
+  </div>
+
+  <div style="margin-top:1rem;">
+    <p style="font-size:12px; color:var(--color-text-secondary); margin:0 0 8px;">Comparativo 2023 — todos os indicadores per capita (R$)</p>
+    <div style="position:relative; width:100%; height:160px;">
+      <canvas id="barChart" role="img" aria-label="Gráfico de barras comparando todos os indicadores per capita em 2023"></canvas>
+    </div>
+  </div>
+
+  <p class="source-note">Fonte fiscal: Dados_Principais.xlsx (SICONFI/STN). População: Censo IBGE 2022. Valores nominais.</p>
+</div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const years = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023];
+
+const data = {
+  receita: {
+    vca: [1419,1539,1663,1680,1822,2029,2239,2555,3217,3408],
+    ilh: [1643,1899,2079,2052,2057,2414,2338,3045,3491,4296],
+    label: 'Receita corrente per capita (R$)'
+  },
+  gasto: {
+    vca: [1377,1471,1616,1594,1718,1981,2108,2465,3049,3268],
+    ilh: [1536,1720,1919,1993,2188,2315,2401,2729,3378,3705],
+    label: 'Despesa total per capita (R$)'
+  },
+  saude: {
+    vca: [494,512,567,551,620,646,676,725,783,880],
+    ilh: [406,443,454,479,606,606,734,737,797,835],
+    label: 'Gasto em saúde per capita (R$)'
+  },
+  educ: {
+    vca: [423,493,527,558,583,645,627,794,1102,1083],
+    ilh: [446,476,490,517,547,626,607,718,952,1088],
+    label: 'Gasto em educação per capita (R$)'
+  }
+};
+
+const vals2023 = {
+  vca: { receita:3408, gasto:3268, saude:880, educ:1083 },
+  ilh: { receita:4296, gasto:3705, saude:835, educ:1088 }
+};
+
+let currentMetric = 'receita';
+let lineChartInst, barChartInst;
+
+const fmt = v => 'R$ ' + v.toLocaleString('pt-BR');
+
+function buildLine(metric) {
+  if (lineChartInst) lineChartInst.destroy();
+  lineChartInst = new Chart(document.getElementById('lineChart'), {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [
+        { label: 'Vitória da Conquista', data: data[metric].vca, borderColor: '#185FA5', backgroundColor: 'rgba(24,95,165,0.08)', tension: 0.4, pointRadius: 3, fill: true },
+        { label: 'Ilhéus', data: data[metric].ilh, borderColor: '#0F6E56', backgroundColor: 'rgba(15,110,86,0.08)', tension: 0.4, pointRadius: 3, fill: true, borderDash: [5,3] }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: 'rgba(128,128,128,0.1)' }, ticks: { font: { size: 11 } } },
+        y: { grid: { color: 'rgba(128,128,128,0.1)' }, ticks: { font: { size: 11 }, callback: v => 'R$'+v.toLocaleString('pt-BR') } }
+      }
+    }
+  });
+}
+
+function buildBar() {
+  if (barChartInst) barChartInst.destroy();
+  barChartInst = new Chart(document.getElementById('barChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Receita', 'Despesa', 'Saúde', 'Educação'],
+      datasets: [
+        { label: 'Vitória da Conquista', data: [3408,3268,880,1083], backgroundColor: 'rgba(24,95,165,0.75)', borderColor:'#185FA5', borderWidth:1 },
+        { label: 'Ilhéus', data: [4296,3705,835,1088], backgroundColor: 'rgba(15,110,86,0.75)', borderColor:'#0F6E56', borderWidth:1 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+        y: { grid: { color: 'rgba(128,128,128,0.1)' }, ticks: { font: { size: 11 }, callback: v => 'R$'+v.toLocaleString('pt-BR') } }
+      }
+    }
+  });
+}
+
+function setMetric(metric) {
+  currentMetric = metric;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('chart-subtitle').textContent = data[metric].label;
+
+  const v2023 = { receita:{vca:3408,ilh:4296}, gasto:{vca:3268,ilh:3705}, saude:{vca:880,ilh:835}, educ:{vca:1083,ilh:1088} };
+  document.getElementById('vca-val').textContent = fmt(v2023[metric].vca);
+  document.getElementById('ilh-val').textContent = fmt(v2023[metric].ilh);
+  buildLine(metric);
+}
+
+buildLine('receita');
+buildBar();
+</script>

@@ -1,0 +1,225 @@
+
+<h2 class="sr-only">Análise de falha de mercado em educação: externalidades positivas e gasto público em Vitória da Conquista e Ilhéus, 2014–2023</h2>
+
+<style>
+* { box-sizing: border-box; }
+.section-title { font-size:14px; font-weight:500; color:var(--color-text-primary); margin:0 0 4px; }
+.section-sub { font-size:12px; color:var(--color-text-secondary); margin:0 0 12px; }
+.card { background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-lg); padding:1rem 1.25rem; }
+.kpi { background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:0.65rem 0.9rem; }
+.kpi-label { font-size:11px; color:var(--color-text-tertiary); margin:0 0 3px; }
+.kpi-val { font-size:18px; font-weight:500; margin:0; }
+.kpi-sub { font-size:10px; color:var(--color-text-tertiary); margin:2px 0 0; }
+.badge { display:inline-block; font-size:10px; font-weight:500; padding:2px 7px; border-radius:99px; }
+.badge-blue { background:#E6F1FB; color:#0C447C; }
+.badge-teal { background:#E1F5EE; color:#085041; }
+.badge-amber { background:#FAEEDA; color:#633806; }
+.badge-red { background:#FCEBEB; color:#791F1F; }
+.divider { border:none; border-top:0.5px solid var(--color-border-tertiary); margin:1.25rem 0; }
+.source { font-size:10px; color:var(--color-text-tertiary); margin-top:8px; }
+.insight-box { border-left:3px solid #185FA5; padding:0.5rem 0.75rem; background:var(--color-background-secondary); border-radius:0 var(--border-radius-md) var(--border-radius-md) 0; margin-bottom:8px; font-size:12px; color:var(--color-text-secondary); }
+.insight-box.teal { border-left-color:#0F6E56; }
+.insight-box.amber { border-left-color:#BA7517; }
+.insight-box.red { border-left-color:#A32D2D; }
+</style>
+
+<div style="padding:1rem 0; display:flex; flex-direction:column; gap:1.25rem;">
+
+<!-- Header -->
+<div>
+  <h3 style="margin:0 0 4px; font-size:16px; font-weight:500;">Falha de mercado: externalidades positivas na educação</h3>
+  <p style="margin:0; font-size:13px; color:var(--color-text-secondary);">Como o gasto público municipal corrige a subprovão privada · Vitória da Conquista (BA) e Ilhéus (BA) · 2014–2023</p>
+</div>
+
+<!-- Teoria em 3 colunas -->
+<div class="card">
+  <p class="section-title">Por que a educação é uma falha de mercado?</p>
+  <p class="section-sub">A educação gera externalidades positivas: os benefícios sociais superam os privados, levando o mercado a subprover.</p>
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">
+    <div style="border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); padding:0.75rem;">
+      <span class="badge badge-red" style="margin-bottom:6px;">Problema</span>
+      <p style="font-size:12px; color:var(--color-text-secondary); margin:0;">O mercado privado cobra pela educação. Famílias de baixa renda consomem menos que o socialmente ótimo — <strong>subconsumo com externalidade positiva.</strong></p>
+    </div>
+    <div style="border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); padding:0.75rem;">
+      <span class="badge badge-amber" style="margin-bottom:6px;">Mecanismo</span>
+      <p style="font-size:12px; color:var(--color-text-secondary); margin:0;">O CMgS (custo marginal social) &lt; CMgP (custo marginal privado). O mercado para no ponto onde CMgP = benefício privado, ignorando os ganhos de produtividade, saúde e renda coletiva.</p>
+    </div>
+    <div style="border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); padding:0.75rem;">
+      <span class="badge badge-teal" style="margin-bottom:6px;">Correção pública</span>
+      <p style="font-size:12px; color:var(--color-text-secondary); margin:0;">O gasto público em educação desloca a oferta para o nível socialmente ótimo via provisão direta (redes municipais), subsídio e transferências (FUNDEB).</p>
+    </div>
+  </div>
+</div>
+
+<!-- KPIs 2023 -->
+<div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+  <div class="kpi">
+    <p class="kpi-label">VCA — gasto educ. per capita 2023</p>
+    <p class="kpi-val" style="color:#185FA5;">R$ 1.083</p>
+    <p class="kpi-sub">+50% vs 2014 real (IPCA)</p>
+  </div>
+  <div class="kpi">
+    <p class="kpi-label">Ilhéus — gasto educ. per capita 2023</p>
+    <p class="kpi-val" style="color:#0F6E56;">R$ 1.088</p>
+    <p class="kpi-sub">+44% vs 2014 real (IPCA)</p>
+  </div>
+  <div class="kpi">
+    <p class="kpi-label">IDEB VCA 2023 vs 2014</p>
+    <p class="kpi-val" style="color:#185FA5;">3,9 → 5,6</p>
+    <p class="kpi-sub">+43,6% · superou média BA</p>
+  </div>
+  <div class="kpi">
+    <p class="kpi-label">IDEB Ilhéus 2023 vs 2014</p>
+    <p class="kpi-val" style="color:#A32D2D;">3,6 → 4,1</p>
+    <p class="kpi-sub">+13,9% · abaixo da média BA</p>
+  </div>
+</div>
+
+<!-- Chart 1: Gasto educação real per capita vs IDEB -->
+<div class="card">
+  <p class="section-title">Gasto em educação per capita (R$, corrigido IPCA base 2023) × IDEB</p>
+  <p class="section-sub">Correlação entre volume de gasto público e resultado educacional medido pelo IDEB</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+    <div>
+      <div style="display:flex; gap:12px; margin-bottom:6px; flex-wrap:wrap;">
+        <span style="font-size:11px; color:var(--color-text-secondary); display:flex; align-items:center; gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#185FA5;display:inline-block;"></span>VCA — gasto educ. real</span>
+        <span style="font-size:11px; color:var(--color-text-secondary); display:flex; align-items:center; gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#0F6E56;display:inline-block;"></span>Ilhéus — gasto educ. real</span>
+      </div>
+      <div style="position:relative; width:100%; height:200px;">
+        <canvas id="gastChart" role="img" aria-label="Gasto em educação per capita corrigido pelo IPCA, Vitória da Conquista e Ilhéus, 2014 a 2023"></canvas>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex; gap:12px; margin-bottom:6px; flex-wrap:wrap;">
+        <span style="font-size:11px; color:var(--color-text-secondary); display:flex; align-items:center; gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#185FA5;display:inline-block;"></span>IDEB VCA</span>
+        <span style="font-size:11px; color:var(--color-text-secondary); display:flex; align-items:center; gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#0F6E56;display:inline-block;"></span>IDEB Ilhéus</span>
+        <span style="font-size:11px; color:var(--color-text-secondary); display:flex; align-items:center; gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#BA7517;display:inline-block;"></span>Média BA</span>
+      </div>
+      <div style="position:relative; width:100%; height:200px;">
+        <canvas id="idebChart" role="img" aria-label="Evolução do IDEB de Vitória da Conquista, Ilhéus e média da Bahia, 2014 a 2023"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Chart 2: Participação educação e saúde na despesa total -->
+<div class="card">
+  <p class="section-title">Participação de educação e saúde na despesa total (%)</p>
+  <p class="section-sub">Estrutura do gasto público como instrumento de correção de falhas de mercado</p>
+  <div style="display:flex; gap:12px; margin-bottom:6px; flex-wrap:wrap;">
+    <span style="font-size:11px; color:var(--color-text-secondary); display:flex; align-items:center; gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#185FA5;display:inline-block;"></span>Educação VCA</span>
+    <span style="font-size:11px; color:var(--color-text-secondary); display:flex; align-items:center; gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#0F6E56;display:inline-block;"></span>Educação Ilhéus</span>
+    <span style="font-size:11px; color:var(--color-text-secondary); display:flex; align-items:center; gap:4px;"><span style="width:18px;height:2px;border-top:2px dashed #185FA5;display:inline-block;vertical-align:middle;"></span>Saúde VCA</span>
+    <span style="font-size:11px; color:var(--color-text-secondary); display:flex; align-items:center; gap:4px;"><span style="width:18px;height:2px;border-top:2px dashed #0F6E56;display:inline-block;vertical-align:middle;"></span>Saúde Ilhéus</span>
+  </div>
+  <div style="position:relative; width:100%; height:200px;">
+    <canvas id="shareChart" role="img" aria-label="Participação percentual de educação e saúde na despesa total dos dois municípios, 2014 a 2023"></canvas>
+  </div>
+</div>
+
+<!-- Análise interpretativa -->
+<div class="card">
+  <p class="section-title">Interpretação econômica: o que os dados revelam</p>
+  <hr class="divider" style="margin:0.5rem 0 0.75rem;">
+  <div class="insight-box">
+    <strong style="color:var(--color-text-primary);">VCA corrigiu mais a falha de mercado.</strong> O IDEB saiu de 3,9 (2014) para 5,6 (2023), superando a média estadual (5,3) e invertendo a posição relativa: em 2014 estava 0,4 ponto abaixo da Bahia; em 2023, 0,3 acima. O gasto real em educação per capita cresceu 51% no período, sinalizando alocação eficiente.
+  </div>
+  <div class="insight-box teal">
+    <strong style="color:var(--color-text-primary);">Ilhéus apresenta paradoxo de subprovão relativa.</strong> Em 2023, o gasto per capita com educação (R$ 1.088 real) é praticamente igual ao de VCA (R$ 1.089), mas o IDEB caiu de 4,6 para 4,1 — e ficou 1,2 ponto abaixo da média baiana. Isso indica que o problema não é apenas volume, mas eficiência alocativa e gestão do gasto.
+  </div>
+  <div class="insight-box amber">
+    <strong style="color:var(--color-text-primary);">Transferências intergovernamentais como instrumento redistributivo.</strong> Ambos os municípios dependem ~70–80% de transferências (FUNDEB, FPM, SUS) para financiar seus gastos sociais — evidência direta de que, sem intervenção federal/estadual, a falha de mercado seria ainda mais grave em municípios com baixa base tributária própria.
+  </div>
+  <div class="insight-box red">
+    <strong style="color:var(--color-text-primary);">Limitação da análise.</strong> Causalidade não pode ser estabelecida apenas com dados agregados: fatores como gestão escolar, perfil socioeconômico e composição etária influenciam o IDEB independentemente do gasto. Os dados são consistentes com a teoria das externalidades, mas não a provam isoladamente.
+  </div>
+</div>
+
+<p class="source">Fonte: Dados_Principais.xlsx (SICONFI/STN) · IDEB: INEP/MEC · Pop.: Censo IBGE 2022 · Deflator: IPCA/IBGE (base 2023)</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const years = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023];
+
+const gastReal = {
+  vca: [721,791,764,760,771,823,767,929,1171,1089],
+  ilh: [760,763,709,705,725,799,743,840,1012,1094]
+};
+const idebData = {
+  vca: [3.9,4.1,4.1,4.7,4.7,5.6,5.6,5.6,5.6,5.6],
+  ilh: [3.6,4.3,4.3,4.6,4.6,4.6,4.6,4.6,4.6,4.1],
+  ba:  [4.3,4.7,4.7,5.1,5.1,5.3,5.3,5.2,5.2,5.3]
+};
+const shareEduc = {
+  vca: [30.7,33.5,32.6,35.0,33.9,32.5,29.7,32.2,36.1,33.2],
+  ilh: [29.0,27.7,25.5,26.0,25.0,27.0,25.3,26.3,28.2,29.4]
+};
+const shareSaude = {
+  vca: [35.9,34.8,35.1,34.5,36.1,32.6,32.1,29.4,25.7,26.9],
+  ilh: [26.4,25.8,23.7,24.0,27.7,26.2,30.6,27.0,23.6,22.5]
+};
+
+const gridColor = 'rgba(128,128,128,0.08)';
+const tickFont = { size: 11 };
+
+new Chart(document.getElementById('gastChart'), {
+  type: 'line',
+  data: {
+    labels: years,
+    datasets: [
+      { label:'VCA', data: gastReal.vca, borderColor:'#185FA5', backgroundColor:'rgba(24,95,165,0.07)', tension:0.4, pointRadius:3, fill:true },
+      { label:'Ilhéus', data: gastReal.ilh, borderColor:'#0F6E56', backgroundColor:'rgba(15,110,86,0.07)', tension:0.4, pointRadius:3, fill:true, borderDash:[5,3] }
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{callbacks:{label: c => c.dataset.label+': R$'+c.raw.toLocaleString('pt-BR')}} },
+    scales:{
+      x:{grid:{color:gridColor},ticks:{font:tickFont}},
+      y:{grid:{color:gridColor},ticks:{font:tickFont, callback: v=>'R$'+v.toLocaleString('pt-BR')}}
+    }
+  }
+});
+
+new Chart(document.getElementById('idebChart'), {
+  type: 'line',
+  data: {
+    labels: years,
+    datasets: [
+      { label:'IDEB VCA', data: idebData.vca, borderColor:'#185FA5', backgroundColor:'rgba(24,95,165,0.07)', tension:0.4, pointRadius:4, fill:false },
+      { label:'IDEB Ilhéus', data: idebData.ilh, borderColor:'#0F6E56', backgroundColor:'rgba(15,110,86,0.07)', tension:0.4, pointRadius:4, fill:false, borderDash:[5,3] },
+      { label:'Média BA', data: idebData.ba, borderColor:'#BA7517', tension:0.4, pointRadius:3, fill:false, borderDash:[2,4], borderWidth:1.5 }
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false} },
+    scales:{
+      x:{grid:{color:gridColor},ticks:{font:tickFont}},
+      y:{min:3, max:6, grid:{color:gridColor},ticks:{font:tickFont, stepSize:0.5}}
+    }
+  }
+});
+
+new Chart(document.getElementById('shareChart'), {
+  type: 'line',
+  data: {
+    labels: years,
+    datasets: [
+      { label:'Educação VCA', data: shareEduc.vca, borderColor:'#185FA5', tension:0.4, pointRadius:3, fill:false },
+      { label:'Educação Ilhéus', data: shareEduc.ilh, borderColor:'#0F6E56', tension:0.4, pointRadius:3, fill:false, borderDash:[5,3] },
+      { label:'Saúde VCA', data: shareSaude.vca, borderColor:'#185FA5', tension:0.4, pointRadius:2, fill:false, borderDash:[2,3], borderWidth:1.5 },
+      { label:'Saúde Ilhéus', data: shareSaude.ilh, borderColor:'#0F6E56', tension:0.4, pointRadius:2, fill:false, borderDash:[2,3], borderWidth:1.5 }
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{callbacks:{label: c => c.dataset.label+': '+c.raw+'%'}} },
+    scales:{
+      x:{grid:{color:gridColor},ticks:{font:tickFont}},
+      y:{min:15, max:45, grid:{color:gridColor},ticks:{font:tickFont, callback: v=>v+'%'}}
+    }
+  }
+});
+</script>

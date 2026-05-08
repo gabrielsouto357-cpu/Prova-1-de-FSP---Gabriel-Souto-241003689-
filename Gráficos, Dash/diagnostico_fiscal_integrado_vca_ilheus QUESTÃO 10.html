@@ -1,0 +1,253 @@
+
+<h2 class="sr-only">Diagnóstico fiscal integrado — Vitória da Conquista e Ilhéus (2014–2023)</h2>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.dash{padding:1rem 0}
+.section-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin:1.5rem 0 .75rem}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1rem}
+.metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem 1rem}
+.metric .lbl{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.metric .val{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.metric .sub{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
+.tabs{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{font-size:13px;padding:5px 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:transparent;cursor:pointer;color:var(--color-text-secondary)}
+.tab.active{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500;border-color:var(--color-border-primary)}
+.panel{display:none}.panel.active{display:block}
+.chart-wrap{position:relative;width:100%}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:10px;font-size:12px;color:var(--color-text-secondary)}
+.legend span{display:flex;align-items:center;gap:5px}
+.legend .sq{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:540px){.grid2{grid-template-columns:1fr}}
+.insight-box{background:var(--color-background-secondary);border-left:3px solid #378ADD;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:.75rem 1rem;font-size:13px;color:var(--color-text-secondary);line-height:1.6;margin-top:.75rem}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:var(--border-radius-md);margin-left:6px}
+.badge-ok{background:var(--color-background-success);color:var(--color-text-success)}
+.badge-warn{background:var(--color-background-warning);color:var(--color-text-warning)}
+.badge-info{background:var(--color-background-info);color:var(--color-text-info)}
+.table-wrap{overflow-x:auto;margin-top:.5rem}
+table{width:100%;font-size:12px;border-collapse:collapse}
+th{text-align:left;color:var(--color-text-secondary);font-weight:500;padding:6px 8px;border-bottom:0.5px solid var(--color-border-tertiary)}
+td{padding:5px 8px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary)}
+tr:last-child td{border-bottom:none}
+.aus-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem 1rem;margin-top:.75rem}
+</style>
+
+<div class="dash">
+
+<div class="tabs" id="tabs">
+  <button class="tab active" onclick="switchTab('receitas')">Receitas</button>
+  <button class="tab" onclick="switchTab('despesas')">Despesas</button>
+  <button class="tab" onclick="switchTab('educacao')">Educação & IDEB</button>
+  <button class="tab" onclick="switchTab('tributario')">Tributário</button>
+  <button class="tab" onclick="switchTab('australia')">Austrália</button>
+  <button class="tab" onclick="switchTab('diagnostico')">Diagnóstico</button>
+</div>
+
+<div id="receitas" class="panel active">
+  <p class="section-title">Receitas correntes reais — 2014 a 2023 (R$ Mi, IPCA 2023)</p>
+  <div class="legend">
+    <span><span class="sq" style="background:#378ADD"></span>Vitória da Conquista</span>
+    <span><span class="sq" style="background:#D85A30"></span>Ilhéus</span>
+  </div>
+  <div class="chart-wrap" style="height:260px"><canvas id="cRec" role="img" aria-label="Evolução das receitas correntes reais de VCA e Ilhéus 2014 a 2023">Receitas crescem ao longo do período para ambos os municípios.</canvas></div>
+  <div class="metrics" style="margin-top:1rem">
+    <div class="metric"><div class="lbl">VCA — crescimento real</div><div class="val">+41,5%</div><div class="sub">2014 → 2023</div></div>
+    <div class="metric"><div class="lbl">Ilhéus — crescimento real</div><div class="val">+54,1%</div><div class="sub">2014 → 2023</div></div>
+    <div class="metric"><div class="lbl">VCA — rec. corrente 2023</div><div class="val">R$ 1.271 Mi</div><div class="sub">valores reais</div></div>
+    <div class="metric"><div class="lbl">Ilhéus — rec. corrente 2023</div><div class="val">R$ 771 Mi</div><div class="sub">valores reais</div></div>
+  </div>
+  <p class="section-title">Composição da receita — transferências vs. tributária (2023)</p>
+  <div class="grid2">
+    <div>
+      <div class="legend"><span><span class="sq" style="background:#378ADD"></span>Transferências</span><span><span class="sq" style="background:#1D9E75"></span>Tributária</span><span><span class="sq" style="background:#888780"></span>Outras</span></div>
+      <div class="chart-wrap" style="height:200px"><canvas id="cCompVCA" role="img" aria-label="Composição receita VCA 2023">Transferências dominam a receita de VCA.</canvas></div>
+      <div style="font-size:12px;color:var(--color-text-secondary);text-align:center;margin-top:4px">Vitória da Conquista</div>
+    </div>
+    <div>
+      <div class="legend"><span><span class="sq" style="background:#378ADD"></span>Transferências</span><span><span class="sq" style="background:#1D9E75"></span>Tributária</span><span><span class="sq" style="background:#888780"></span>Outras</span></div>
+      <div class="chart-wrap" style="height:200px"><canvas id="cCompILH" role="img" aria-label="Composição receita Ilhéus 2023">Transferências dominam a receita de Ilhéus.</canvas></div>
+      <div style="font-size:12px;color:var(--color-text-secondary);text-align:center;margin-top:4px">Ilhéus</div>
+    </div>
+  </div>
+  <div class="insight-box">Ambos os municípios mantêm ~72% de dependência de transferências (FPM, SUS, FUNDEB). A arrecadação própria cresceu expressivamente — especialmente VCA, cuja receita tributária quase dobrou em termos reais —, mas o modelo de financiamento segue predominantemente federativo.</div>
+</div>
+
+<div id="despesas" class="panel">
+  <p class="section-title">Receitas vs. despesas reais — equilíbrio fiscal (R$ Mi)</p>
+  <div class="legend">
+    <span><span class="sq" style="background:#378ADD"></span>VCA — Receita</span>
+    <span><span class="sq" style="background:#B5D4F4"></span>VCA — Despesa</span>
+    <span><span class="sq" style="background:#D85A30"></span>ILH — Receita</span>
+    <span><span class="sq" style="background:#F0997B"></span>ILH — Despesa</span>
+  </div>
+  <div class="chart-wrap" style="height:280px"><canvas id="cRD" role="img" aria-label="Receitas e despesas reais VCA e Ilhéus 2014 a 2023">VCA manteve equilíbrio fiscal ao longo de todo o período. Ilhéus apresentou déficits em 2018 e 2020.</canvas></div>
+  <div class="metrics" style="margin-top:1rem">
+    <div class="metric"><div class="lbl">VCA — déficits no período</div><div class="val">0 <span class="badge badge-ok">estável</span></div><div class="sub">100% dos anos no azul</div></div>
+    <div class="metric"><div class="lbl">Ilhéus — anos deficitários</div><div class="val">2 <span class="badge badge-warn">atenção</span></div><div class="sub">2018 e 2020</div></div>
+    <div class="metric"><div class="lbl">VCA — desp./rec. em 2023</div><div class="val">95,9%</div><div class="sub">quase no limite</div></div>
+    <div class="metric"><div class="lbl">Ilhéus — desp./rec. em 2023</div><div class="val">86,2%</div><div class="sub">melhor da série</div></div>
+  </div>
+  <p class="section-title">Gasto em saúde e educação — valores reais (R$ Mi)</p>
+  <div class="chart-wrap" style="height:240px"><canvas id="cSE" role="img" aria-label="Gastos em saúde e educação VCA e Ilhéus">Gastos em saúde e educação cresceram em ambas as cidades.</canvas></div>
+  <div class="insight-box">VCA é mais previsível: opera sempre com folga pequena, porém positiva. Ilhéus tem maior volatilidade mas encerrou 2023 com o melhor saldo da sua série histórica. O engessamento das despesas obrigatórias (mínimos constitucionais de saúde e educação) é o principal limitador da flexibilidade fiscal em ambos os casos.</div>
+</div>
+
+<div id="educacao" class="panel">
+  <p class="section-title">IDEB e gasto real em educação — 2014 a 2023</p>
+  <div class="legend">
+    <span><span class="sq" style="background:#378ADD"></span>VCA — IDEB</span>
+    <span><span class="sq" style="background:#D85A30"></span>ILH — IDEB</span>
+    <span><span class="sq" style="background:#97C459"></span>IDEB Bahia</span>
+  </div>
+  <div class="chart-wrap" style="height:250px"><canvas id="cIDEB" role="img" aria-label="Evolução IDEB VCA Ilhéus e Bahia 2014 a 2023">VCA salta de 3,9 para 5,6. Ilhéus cai de 4,6 para 4,1 em 2023.</canvas></div>
+  <div class="metrics" style="margin-top:1rem">
+    <div class="metric"><div class="lbl">VCA — variação IDEB</div><div class="val">+1,7 pts <span class="badge badge-ok">↑</span></div><div class="sub">3,9 → 5,6</div></div>
+    <div class="metric"><div class="lbl">ILH — variação IDEB</div><div class="val">−0,5 pts <span class="badge badge-warn">↓</span></div><div class="sub">4,6 → 4,1</div></div>
+    <div class="metric"><div class="lbl">VCA — gasto educ. 2023</div><div class="val">R$ 404 Mi</div><div class="sub">+51% real vs 2014</div></div>
+    <div class="metric"><div class="lbl">ILH — gasto educ. 2023</div><div class="val">R$ 195 Mi</div><div class="sub">+44% real vs 2014</div></div>
+  </div>
+  <p class="section-title">Gasto em educação vs. IDEB — dispersão</p>
+  <div class="chart-wrap" style="height:240px"><canvas id="cScatter" role="img" aria-label="Dispersão gasto educação vs IDEB VCA e Ilhéus">VCA mostra correlação positiva. Ilhéus mostra relação fraca.</canvas></div>
+  <div class="insight-box">Em VCA, 40% da variação do IDEB é explicada pelo gasto em educação (R²≈0,40). Em Ilhéus, a correlação é estatisticamente insignificante — o gasto cresceu, mas o índice estagnou e até recuou. Isso aponta para problema de eficiência alocativa e gestão, não de volume de recursos.</div>
+</div>
+
+<div id="tributario" class="panel">
+  <p class="section-title">Receita tributária real — IPTU e ISS (R$ Mi)</p>
+  <div class="legend">
+    <span><span class="sq" style="background:#378ADD"></span>VCA — ISS</span>
+    <span><span class="sq" style="background:#185FA5"></span>VCA — IPTU</span>
+    <span><span class="sq" style="background:#D85A30"></span>ILH — ISS</span>
+    <span><span class="sq" style="background:#993C1D"></span>ILH — IPTU</span>
+  </div>
+  <div class="chart-wrap" style="height:260px"><canvas id="cTrib" role="img" aria-label="Evolução IPTU e ISS real VCA e Ilhéus 2014 a 2023">ISS cresce expressivamente em VCA. IPTU cresce nas duas cidades.</canvas></div>
+  <div class="metrics" style="margin-top:1rem">
+    <div class="metric"><div class="lbl">VCA — ISS real 2023</div><div class="val">R$ 124 Mi</div><div class="sub">+65,7% vs 2014</div></div>
+    <div class="metric"><div class="lbl">VCA — IPTU real 2023</div><div class="val">R$ 57 Mi</div><div class="sub">+165% vs 2014</div></div>
+    <div class="metric"><div class="lbl">ILH — ISS real 2023</div><div class="val">R$ 55 Mi</div><div class="sub">+52,9% vs 2014</div></div>
+    <div class="metric"><div class="lbl">ILH — IPTU real 2023</div><div class="val">R$ 31 Mi</div><div class="sub">+223% vs 2014</div></div>
+  </div>
+  <p class="section-title">Esforço fiscal — carga tributária / receita corrente (%)</p>
+  <div class="chart-wrap" style="height:200px"><canvas id="cEsf" role="img" aria-label="Esforço fiscal VCA e Ilhéus 2014 a 2023">VCA passa de 14% para 21% de esforço fiscal. Ilhéus cresce de 14% para 19%.</canvas></div>
+  <div class="insight-box">O crescimento do esforço fiscal confirma trajetória ascendente em ambas as cidades. O resultado da regressão quadrática (Curva de Laffer municipal) indica coeficiente positivo — as cidades ainda estão na fase ascendente da curva, longe do ponto de sufocamento da atividade econômica.</div>
+</div>
+
+<div id="australia" class="panel">
+  <p class="section-title">Austrália — indicadores fiscais do governo geral (% do PIB, corrigidos)</p>
+  <div class="legend">
+    <span><span class="sq" style="background:#378ADD"></span>Receita geral</span>
+    <span><span class="sq" style="background:#D85A30"></span>Despesa total</span>
+    <span><span class="sq" style="background:#888780"></span>Dívida bruta</span>
+  </div>
+  <div class="chart-wrap" style="height:260px"><canvas id="cAUS" role="img" aria-label="Indicadores fiscais da Austrália 2014 a 2023">Receita estável ~35%. Despesa sobe em 2020 pandemia e recua. Dívida cresce e estabiliza ~50%.</canvas></div>
+  <div class="metrics" style="margin-top:1rem">
+    <div class="metric"><div class="lbl">Receita % PIB (2023)</div><div class="val">36,2%</div><div class="sub">estável na última década</div></div>
+    <div class="metric"><div class="lbl">Pico de gasto (2020)</div><div class="val">44,4%</div><div class="sub">resposta à pandemia</div></div>
+    <div class="metric"><div class="lbl">Déficit estrutural 2023</div><div class="val">−1,1%</div><div class="sub">do PIB potencial</div></div>
+    <div class="metric"><div class="lbl">Dívida bruta 2023</div><div class="val">49,4%</div><div class="sub">do PIB</div></div>
+  </div>
+  <div class="insight-box">A Austrália ilustra disciplina fiscal baseada em instituições sólidas (ANAO), regime de competência (GFSM 2014) e sistema parlamentar com incentivo ao equilíbrio orçamentário. Após a expansão pandêmica de 2020, voltou à trajetória de consolidação fiscal em apenas 3 anos — referência para os municípios brasileiros no desenho de reservas anticíclicas.</div>
+</div>
+
+<div id="diagnostico" class="panel">
+  <p class="section-title">Síntese do diagnóstico fiscal integrado</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Dimensão</th><th>Vitória da Conquista</th><th>Ilhéus</th></tr></thead>
+      <tbody>
+        <tr><td>Equilíbrio fiscal</td><td>✅ Superávit em todos os anos</td><td>⚠️ Déficits em 2018 e 2020</td></tr>
+        <tr><td>Crescimento da receita real</td><td>+41,5% (2014–2023)</td><td>+54,1% (2014–2023)</td></tr>
+        <tr><td>Dependência de transferências</td><td>~72% (queda de 80%)</td><td>~72% (queda de 82%)</td></tr>
+        <tr><td>Esforço tributário próprio</td><td>+50% real (ISS + IPTU)</td><td>+60% real (ISS + IPTU)</td></tr>
+        <tr><td>Resultado IDEB</td><td>3,9 → 5,6 (+43%)</td><td>4,6 → 4,1 (−11%)</td></tr>
+        <tr><td>Eficiência gasto educacional</td><td>✅ Correlação positiva (R²≈0,4)</td><td>❌ Sem correlação estatística</td></tr>
+        <tr><td>Volatilidade fiscal</td><td>Baixa — gestão conservadora</td><td>Alta — exposição a choques</td></tr>
+        <tr><td>Receita per capita 2023</td><td>R$ 3.408</td><td>R$ 4.296 (+26%)</td></tr>
+        <tr><td>PIB municipal 2023</td><td>R$ 1.273 Bi</td><td>R$ 727 Mi</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="section-title" style="margin-top:1.5rem">Pontos críticos e recomendações</p>
+  <div class="grid2">
+    <div class="aus-card">
+      <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px">Vitória da Conquista</div>
+      <ul style="font-size:12px;color:var(--color-text-secondary);padding-left:14px;line-height:1.8">
+        <li>Folga fiscal muito estreita (≈5%). Requer fundo de reserva</li>
+        <li>Potencial tributário do IPTU ainda subexplorado (planta desatualizada)</li>
+        <li>Gasto em educação converte-se em IDEB — modelo a ser mantido</li>
+        <li>Correlação receita-PIB &gt; 1 exige precaução em ciclos de baixa</li>
+      </ul>
+    </div>
+    <div class="aus-card">
+      <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px">Ilhéus</div>
+      <ul style="font-size:12px;color:var(--color-text-secondary);padding-left:14px;line-height:1.8">
+        <li>Déficits cíclicos indicam fragilidade estrutural em choques</li>
+        <li>Gasto em educação não se traduz em IDEB — revisar alocação</li>
+        <li>Receita per capita maior, mas IDEB inferior — ineficiência de gestão</li>
+        <li>Necessidade de diversificação da base tributária além do turismo</li>
+      </ul>
+    </div>
+  </div>
+  <div class="insight-box" style="border-color:#1D9E75;margin-top:1rem">
+    <strong style="color:var(--color-text-primary)">Lição da Austrália aplicada ao contexto municipal:</strong> instituições fortes, auditoria independente (TCM) e regime de competência permitem respostas fiscais rápidas sem perda de credibilidade. Criar reservas anticíclicas e reduzir progressivamente a dependência de transferências são as prioridades estratégicas para ambos os municípios.
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+function switchTab(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+const anos = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023];
+const vcaRec = [897.7,915.0,893.2,849.3,894.6,960.1,1016.0,1109.3,1268.7,1270.7];
+const ilhRec = [500.8,544.0,537.9,499.6,486.4,550.2,511.0,636.8,663.2,771.5];
+const vcaDes = [870.9,874.6,868.0,805.9,843.4,937.6,956.3,1070.0,1202.6,1218.5];
+const ilhDes = [468.1,492.7,496.5,485.3,517.4,527.7,524.7,570.7,641.7,665.5];
+const vcaSau = [312.7,304.6,304.5,278.3,304.2,305.6,306.8,314.6,308.7,328.1];
+const vcaEdu = [267.4,293.3,283.3,281.9,286.1,305.0,284.3,344.7,434.5,404.0];
+const ilhSau = [123.7,126.9,117.6,116.5,143.4,138.1,160.5,154.0,151.4,150.1];
+const ilhEdu = [135.8,136.3,126.7,126.0,129.5,142.7,132.7,150.1,180.8,195.4];
+const vcaIPTU = [21.6,23.9,25.5,25.6,42.1,42.3,38.2,53.6,48.5,57.2];
+const vcaISS  = [75.0,80.8,72.6,73.6,85.7,87.7,79.3,95.7,137.6,124.3];
+const ilhIPTU = [9.4,15.6,19.6,20.9,0,25.7,22.2,29.6,31.2,30.5];
+const ilhISS  = [36.1,45.2,40.2,41.0,0,31.5,36.6,37.3,47.9,55.2];
+const vcaEsf  = vcaRec.map((r,i)=>+(vcaDes[i]&&vcaDes[i]>0?((vcaIPTU[i]+vcaISS[i])/r*100).toFixed(1):0));
+const ilhEsf  = ilhRec.map((r,i)=>+(((ilhIPTU[i]+ilhISS[i])/r)*100).toFixed(1));
+const vcaIDEB = [3.9,4.1,4.1,4.7,4.7,5.6,5.6,5.6,5.6,5.6];
+const ilhIDEB = [3.6,4.3,4.3,4.6,4.6,4.6,4.6,4.6,4.6,4.1];
+const baIDEB  = [4.3,4.7,4.7,5.1,5.1,5.3,5.3,5.2,5.2,5.3];
+const ausRec  = [33.8,34.5,34.8,35.0,35.6,34.5,35.7,35.4,35.3,36.2];
+const ausDes  = [36.7,37.2,37.3,36.7,36.8,38.9,44.4,41.8,37.6,37.1];
+const ausDeb  = [34.0,37.7,40.6,41.2,41.7,46.7,57.0,55.5,50.1,49.4];
+
+const gOpts = (yLbl)=>({responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:11},color:'#888780',autoSkip:false,maxRotation:45}},y:{ticks:{font:{size:11},color:'#888780'},title:{display:!!yLbl,text:yLbl,font:{size:11},color:'#888780'}}}});
+
+new Chart(document.getElementById('cRec'),{type:'line',data:{labels:anos,datasets:[{label:'VCA',data:vcaRec,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,.08)',fill:true,tension:.3,pointRadius:3},{label:'Ilhéus',data:ilhRec,borderColor:'#D85A30',backgroundColor:'rgba(216,90,48,.08)',fill:true,tension:.3,pointRadius:3}]},options:{...gOpts('R$ Mi'),plugins:{legend:{display:false}}}});
+
+const pie=(id,data,colors,lbl)=>new Chart(document.getElementById(id),{type:'doughnut',data:{labels:lbl,datasets:[{data,backgroundColor:colors,borderWidth:1,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.parsed.toFixed(1)}%`}}}}});
+const vcaT2023=1270.7,ilhT2023=771.5;
+pie('cCompVCA',[910.3/vcaT2023*100,264.4/vcaT2023*100,(vcaT2023-910.3-264.4)/vcaT2023*100],['#378ADD','#1D9E75','#888780'],['Transferências','Tributária','Outras']);
+pie('cCompILH',[553.0/ilhT2023*100,150.6/ilhT2023*100,(ilhT2023-553.0-150.6)/ilhT2023*100],['#378ADD','#1D9E75','#888780'],['Transferências','Tributária','Outras']);
+
+new Chart(document.getElementById('cRD'),{type:'bar',data:{labels:anos,datasets:[{label:'VCA Rec',data:vcaRec,backgroundColor:'#378ADD'},{label:'VCA Des',data:vcaDes,backgroundColor:'#B5D4F4'},{label:'ILH Rec',data:ilhRec,backgroundColor:'#D85A30'},{label:'ILH Des',data:ilhDes,backgroundColor:'#F0997B'}]},options:{...gOpts('R$ Mi'),scales:{x:{ticks:{font:{size:10},autoSkip:false,maxRotation:45},grouped:true},y:{ticks:{font:{size:11}}}}}});
+
+new Chart(document.getElementById('cSE'),{type:'line',data:{labels:anos,datasets:[{label:'VCA Saúde',data:vcaSau,borderColor:'#378ADD',borderDash:[4,2],tension:.3,pointRadius:2},{label:'VCA Educ',data:vcaEdu,borderColor:'#378ADD',tension:.3,pointRadius:2},{label:'ILH Saúde',data:ilhSau,borderColor:'#D85A30',borderDash:[4,2],tension:.3,pointRadius:2},{label:'ILH Educ',data:ilhEdu,borderColor:'#D85A30',tension:.3,pointRadius:2}]},options:{...gOpts('R$ Mi')}});
+
+new Chart(document.getElementById('cIDEB'),{type:'line',data:{labels:anos,datasets:[{label:'VCA',data:vcaIDEB,borderColor:'#378ADD',tension:.3,pointRadius:4},{label:'Ilhéus',data:ilhIDEB,borderColor:'#D85A30',tension:.3,pointRadius:4},{label:'Bahia',data:baIDEB,borderColor:'#97C459',borderDash:[4,2],tension:.3,pointRadius:2}]},options:{...gOpts('IDEB'),scales:{y:{min:3.0,max:6.2}}}});
+
+const scatterPts=[...vcaEdu.map((g,i)=>({x:+g.toFixed(1),y:vcaIDEB[i],cidade:'VCA'})),...ilhEdu.map((g,i)=>({x:+g.toFixed(1),y:ilhIDEB[i],cidade:'ILH'}))];
+new Chart(document.getElementById('cScatter'),{type:'scatter',data:{datasets:[{label:'VCA',data:scatterPts.filter(p=>p.cidade==='VCA').map(p=>({x:p.x,y:p.y})),backgroundColor:'rgba(55,138,221,.7)',pointRadius:6},{label:'Ilhéus',data:scatterPts.filter(p=>p.cidade==='ILH').map(p=>({x:p.x,y:p.y})),backgroundColor:'rgba(216,90,48,.7)',pointRadius:6,pointStyle:'rect'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{title:{display:true,text:'Gasto educação (R$ Mi)',font:{size:11},color:'#888780'}},y:{title:{display:true,text:'IDEB',font:{size:11},color:'#888780'},min:3.0,max:6.5}}}});
+
+new Chart(document.getElementById('cTrib'),{type:'bar',data:{labels:anos,datasets:[{label:'VCA ISS',data:vcaISS,backgroundColor:'#378ADD'},{label:'VCA IPTU',data:vcaIPTU,backgroundColor:'#185FA5'},{label:'ILH ISS',data:ilhISS,backgroundColor:'#D85A30'},{label:'ILH IPTU',data:ilhIPTU,backgroundColor:'#993C1D'}]},options:{...gOpts('R$ Mi'),scales:{x:{ticks:{font:{size:10},autoSkip:false,maxRotation:45}},y:{}}}});
+
+new Chart(document.getElementById('cEsf'),{type:'line',data:{labels:anos,datasets:[{label:'VCA',data:vcaEsf,borderColor:'#378ADD',tension:.3,fill:false,pointRadius:3},{label:'Ilhéus',data:ilhEsf,borderColor:'#D85A30',tension:.3,fill:false,pointRadius:3}]},options:{...gOpts('%'),scales:{y:{title:{display:true,text:'Rec. trib. / Rec. corrente (%)'},min:10,max:25}}}});
+
+new Chart(document.getElementById('cAUS'),{type:'line',data:{labels:anos,datasets:[{label:'Receita % PIB',data:ausRec,borderColor:'#378ADD',tension:.3,pointRadius:3},{label:'Despesa % PIB',data:ausDes,borderColor:'#D85A30',tension:.3,pointRadius:3},{label:'Dívida bruta % PIB',data:ausDeb,borderColor:'#888780',borderDash:[5,3],tension:.3,pointRadius:2}]},options:{...gOpts('% PIB'),scales:{y:{min:25,max:65}}}});
+</script>
